@@ -101,17 +101,21 @@ mvn spring-boot:run
 
 ## Deployment to Render
 
-1. Create a MySQL database on a managed cloud provider (e.g., Aiven, PlanetScale, Railway, or AWS RDS).
-2. Push `trading-journal-backend` to GitHub.
-3. In Render, select **New +** -> **Web Service**.
-4. Connect the repository and configure:
-   - **Environment**: `Java`
-   - **Build Command**: `mvn clean package -DskipTests`
-   - **Start Command**: `java -jar target/trading-journal-backend-1.0.0.jar`
-5. Under **Environment Variables**, provide:
-   - `DB_URL`: `jdbc:mysql://<cloud-db-host>:3306/<database>?useSSL=true&serverTimezone=UTC`
+Because Render does not have a native Java runtime, this repository uses a production-ready **multi-stage Dockerfile** and `render.yaml` Blueprint:
+
+1. Create a MySQL database on a managed cloud provider (e.g., Aiven for MySQL, TiDB Cloud, Clever Cloud, Railway, or AWS RDS).
+2. In Render Dashboard, click **New +** -> **Web Service** (or use the connected `Trade_Tracker_backend` service).
+3. If creating a new service:
+   - Connect the repository `Trade_Tracker_backend`.
+   - Set **Runtime**: `Docker` (Render will automatically detect the `Dockerfile`).
+   - If configuring an existing service:
+     - Go to **Settings** -> **Build & Deploy**.
+     - Change **Runtime** to `Docker`.
+     - Set **Dockerfile Path**: `./Dockerfile`.
+4. Under **Environment Variables**, provide:
+   - `DB_URL`: `jdbc:mysql://<cloud-db-host>:3306/<database>?useSSL=true&serverTimezone=UTC` (or your cloud JDBC URL)
    - `DB_USERNAME`: Database username
    - `DB_PASSWORD`: Database password
    - `PORT`: `8080`
-   - `CORS_ALLOWED_ORIGINS`: Your Vercel frontend URL (e.g., `https://tradetrack.vercel.app`)
-6. Click **Create Web Service**.
+   - `CORS_ALLOWED_ORIGINS`: Your frontend URL (e.g., `https://tradetrack-frontend.onrender.com,http://localhost:5173`)
+5. Deploy the service. Render will build the container with Maven and boot the Spring Boot application on port `$PORT`.
