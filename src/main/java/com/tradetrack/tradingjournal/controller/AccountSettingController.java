@@ -1,14 +1,16 @@
 package com.tradetrack.tradingjournal.controller;
 
 import com.tradetrack.tradingjournal.entity.AccountTransaction;
+import com.tradetrack.tradingjournal.repository.*;
 import com.tradetrack.tradingjournal.service.AccountSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,10 +19,25 @@ import java.util.Map;
 public class AccountSettingController {
 
     private final AccountSettingService settingService;
+    private final TradeRepository tradeRepository;
+    private final DailyJournalRepository dailyJournalRepository;
+    private final WatchlistRepository watchlistRepository;
+    private final ObservationNoteRepository observationNoteRepository;
+    private final AccountTransactionRepository accountTransactionRepository;
 
     @Autowired
-    public AccountSettingController(AccountSettingService settingService) {
+    public AccountSettingController(AccountSettingService settingService,
+                                    TradeRepository tradeRepository,
+                                    DailyJournalRepository dailyJournalRepository,
+                                    WatchlistRepository watchlistRepository,
+                                    ObservationNoteRepository observationNoteRepository,
+                                    AccountTransactionRepository accountTransactionRepository) {
         this.settingService = settingService;
+        this.tradeRepository = tradeRepository;
+        this.dailyJournalRepository = dailyJournalRepository;
+        this.watchlistRepository = watchlistRepository;
+        this.observationNoteRepository = observationNoteRepository;
+        this.accountTransactionRepository = accountTransactionRepository;
     }
 
     @GetMapping
@@ -53,5 +70,20 @@ public class AccountSettingController {
     public ResponseEntity<Void> deleteTransaction(@PathVariable Long id) {
         settingService.deleteTransaction(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/reset-data")
+    @Transactional
+    public ResponseEntity<Map<String, String>> resetAllData() {
+        tradeRepository.deleteAllInBatch();
+        dailyJournalRepository.deleteAllInBatch();
+        watchlistRepository.deleteAllInBatch();
+        observationNoteRepository.deleteAllInBatch();
+        accountTransactionRepository.deleteAllInBatch();
+
+        Map<String, String> response = new HashMap<>();
+        response.put("status", "SUCCESS");
+        response.put("message", "All trading records, daily journals, watchlist items, and notes have been cleared.");
+        return ResponseEntity.ok(response);
     }
 }
