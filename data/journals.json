@@ -1,0 +1,85 @@
+{
+  "demo-user-id": {
+    "2026-11-02": {
+      "date": "2026-11-02",
+      "day": "Monday",
+      "startingBalance": 25000,
+      "closedPL": 277,
+      "totalBrokerage": 40,
+      "closingBalance": 25237,
+      "trades": [
+        {
+          "name": "AAPL",
+          "buy": "224.50",
+          "sell": "228.00",
+          "qty": "50",
+          "target": "230.00",
+          "sl": "222.00",
+          "pl": "175.00"
+        },
+        {
+          "name": "NVDA",
+          "buy": "138.20",
+          "sell": "142.50",
+          "qty": "40",
+          "target": "145.00",
+          "sl": "136.00",
+          "pl": "172.00"
+        },
+        {
+          "name": "TSLA",
+          "buy": "255.00",
+          "sell": "251.50",
+          "qty": "20",
+          "target": "260.00",
+          "sl": "251.50",
+          "pl": "-70.00"
+        }
+      ],
+      "profit": 347,
+      "loss": 70,
+      "watchlist": "MSFT break above 425\nAMD pullback to 155\nSPY 580 call options",
+      "marketMovements": "Tech rally led by semiconductors after strong guidance. High morning volatility settling into clean trend.",
+      "mistakes": "Exited TSLA near stop-loss without waiting for 15-min candle confirmation, but honored risk limits.",
+      "riskRewards": "Maintained 1:2.5 R:R on AAPL and NVDA. Kept max drawdown per trade strictly under 1% of equity.",
+      "notes": "Disciplined execution today. Let winners run and cut losers quickly. Prepare watchlist levels tonight.",
+      "updatedAt": "2026-11-02T15:52:14.933Z"
+    },
+    "2026-11-01": {
+      "date": "2026-11-01",
+      "day": "Sunday",
+      "startingBalance": 24700,
+      "closedPL": 320,
+      "totalBrokerage": 20,
+      "closingBalance": 25000,
+      "trades": [
+        {
+          "name": "MSFT",
+          "buy": "420.00",
+          "sell": "424.00",
+          "qty": "50",
+          "target": "426.00",
+          "sl": "418.00",
+          "pl": "200.00"
+        },
+        {
+          "name": "AMZN",
+          "buy": "185.50",
+          "sell": "188.50",
+          "qty": "40",
+          "target": "190.00",
+          "sl": "183.00",
+          "pl": "120.00"
+        }
+      ],
+      "profit": 320,
+      "loss": 0,
+      "watchlist": "AAPL, NVDA, TSLA",
+      "marketMovements": "Broad market trended upward with steady breadth.",
+      "mistakes": "None major. Stuck firmly to trading rules.",
+      "riskRewards": "Targeted 1:2 R:R achieved on both positions.",
+      "notes": "Smooth session. Ready for next day.",
+      "updatedAt": "2026-11-02T15:52:14.934Z"
+    }
+  }
+}

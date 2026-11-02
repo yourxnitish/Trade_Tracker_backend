@@ -1,0 +1,16 @@
+[
+  {
+    "id": "demo-user-id",
+    "email": "demo@tradingjournal.com",
+    "name": "Demo Trader",
+    "password": "b575109e81abb970355a2a8d66dc14c2253a2353f84ca4ca21751717849759bc",
+    "createdAt": "2026-11-02T15:52:14.833Z"
+  },
+  {
+    "id": "1578255b-b8db-4c93-a25c-2c40807d95e3",
+    "email": "arnitish@gmail.com",
+    "name": "Nitish",
+    "password": "714b0ed8ee0c3fd9d4ac1cf4a1971b19fee220a3807a6d5b8735201ef67ec6b7",
+    "createdAt": "2026-11-02T15:59:01.395Z"
+  }
+]
